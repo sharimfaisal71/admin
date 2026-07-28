@@ -11,7 +11,16 @@ body{
     background:#111827;
     color:white;
 }
-
+.statusBtn{
+    width:auto;
+    padding:6px 10px;
+    margin:2px;
+    font-size:12px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    display:inline-block;
+}
 /* Centers the login box on the page */
 #loginContainer{
     display:flex;
@@ -219,22 +228,22 @@ snapshot.forEach(doc => {
             <p>City: ${order.city}</p>
             <p>Address: ${order.address}</p>
             <p>Status: ${order.status}</p>
-  <button onclick="addStatus('${doc.id}', '🔴 Cancelled/ Failed Delivery')">
+  <button class="statusBtn" onclick="addStatus('${doc.id}', '🔴 Cancelled/ Failed Delivery')">
         🔴 Cancelled/ Failed
     </button>
-   <button onclick="addStatus('${doc.id}', '🟠 Processing')">
+   <button class="statusBtn" onclick="addStatus('${doc.id}', '🟠 Processing')">
         🟠 Processing
     </button>
 
-    <button onclick="addStatus('${doc.id}', '🟡 Shipped')">
+    <button class="statusBtn" onclick="addStatus('${doc.id}', '🟡 Shipped')">
         🟡 Shipped
     </button>
 
-    <button onclick="addStatus('${doc.id}', ' 🟢 Delivered')">
+    <button class="statusBtn" onclick="addStatus('${doc.id}', ' 🟢 Delivered')">
         🟢 Delivered
     </button>
             <p>Total: ${order.total}</p>
-            
+    </hr>
         </div>
     `;
 
