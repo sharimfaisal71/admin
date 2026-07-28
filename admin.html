@@ -68,23 +68,24 @@ Sign in with Google
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import {
-    getFirestore,
-    collection,
-    getDocs,
-    setDoc,
-    updateDoc, 
-    doc,
-    getDoc,
-    query,
-    orderBy
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+  getFirestore,
+  collection,
+  getDocs,
+  setDoc,
+  updateDoc,
+  doc,
+  getDoc,
+  query,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
 import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
-  onAuthStateChanged
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
 
 
 
