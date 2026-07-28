@@ -35,36 +35,49 @@ button{
     color:white;
     font-size:16px;
 }
-.topbar{
-    position:sticky;
-    top:0;
+#topbar{
+    display:none;
+    align-items:center;
+    justify-content:space-between;
     background:#111827;
     color:white;
     padding:15px 25px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
     border-bottom:2px solid #4285F4;
 }
 
-.topbar h1{
+#topbar .left{
+    width:180px;
+}
+
+#topbar .center{
+    flex:1;
+    text-align:center;
+}
+
+#topbar .right{
+    width:180px;
+}
+
+#topbar h1{
     margin:0;
-    font-size:30px;
+    font-size:32px;
 }
-.topbar{
-    display:none;
-}
+
 #logoutBtn{
-    position:absolute;
-    left:25px;
-    width:auto;
-    padding:10px 18px;
+    width:140px;
+    padding:10px;
     background:#dc2626;
+    color:white;
+    border:none;
     border-radius:8px;
+    cursor:pointer;
 }
 
 #logoutBtn:hover{
     background:#b91c1c;
+}
+.topbar{
+    display:none;
 }
 
 #orders{
@@ -74,11 +87,17 @@ button{
 </head>
 
 <body>
-<header class="topbar" id="topbar">
+<header id="topbar">
 
-    <button id="logoutBtn">🚪 Log Out</button>
+    <div class="left">
+        <button id="logoutBtn">🚪 Log Out</button>
+    </div>
 
-    <h1>SFH Orders</h1>
+    <div class="center">
+        <h1>SFH Orders</h1>
+    </div>
+
+    <div class="right"></div>
 
 </header>
 <div class="loginBox" id="loginBox">
@@ -269,6 +288,13 @@ console.log(snapshot.size);
 snapshot.forEach(doc => console.log(doc.id, doc.data()));
 document.getElementById("orders").innerHTML = html;
     document.querySelector(".loginBox").style.display = "none";
+document.getElementById("logoutBtn").onclick = async () => {
+
+    await signOut(auth);
+
+    location.reload();
+
+};
 document.querySelector(".topbar").style.display = "flex";
 });
 
