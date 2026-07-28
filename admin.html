@@ -36,7 +36,7 @@ button{
     font-size:16px;
 }
 
-#adminPanel{
+#orders{
     display:none;
 }
 </style>
@@ -57,7 +57,7 @@ Sign in with Google
 </button>
 
 </div>
-
+<div>
 <h2>SFH Orders</h2>
 
 <div id="orders">
@@ -129,7 +129,7 @@ onAuthStateChanged(auth,function(user){
 
     document.getElementById("login").style.display="none";
 
-    document.getElementById("adminPanel").style.display="block";
+    document.getElementById("orders").style.display="block";
 
 });
 const q = query(
