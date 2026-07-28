@@ -51,7 +51,9 @@ button{
     margin:0;
     font-size:30px;
 }
-
+.topbar{
+    display:none;
+}
 #logoutBtn{
     position:absolute;
     left:25px;
@@ -266,7 +268,8 @@ console.log(snapshot.size);
 
 snapshot.forEach(doc => console.log(doc.id, doc.data()));
 document.getElementById("orders").innerHTML = html;
-    
+    document.querySelector(".loginBox").style.display = "none";
+document.querySelector(".topbar").style.display = "flex";
 });
 
 
