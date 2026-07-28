@@ -57,12 +57,14 @@ Sign in with Google
 </button>
 
 </div>
+
+</div>
 <h2>SFH Orders</h2>
 <div id="orders">
 
 </div>
 
-</div>
+
 
 <script type="module">
 
@@ -101,9 +103,7 @@ import {
 
 
 const app = initializeApp(firebaseConfig);
-console.log(app);
 const db = getFirestore(app);
-console.log(db);
 const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
