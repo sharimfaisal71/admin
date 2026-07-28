@@ -12,10 +12,21 @@ body{
     color:white;
 }
 
-.loginBox{
+/* Centers the login box on the page */
+#loginContainer{
+    display:flex;
     justify-content:center;
     align-items:center;
     height:100vh;
+}
+
+/* Centers the content inside the login box */
+.loginBox{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
     background:#1f2937;
     padding:30px;
     border-radius:12px;
@@ -100,7 +111,8 @@ button{
     </div>
 
 </header>
-<div class="loginBox" id="loginBox">
+    <div id="loginContainer">
+<div class="loginBox">
 
 <div id="login">
 
@@ -115,6 +127,7 @@ Sign in with Google
 </div>
 
 </div>
+    </div>
 <div id="orders"></div>
 
 
@@ -177,7 +190,7 @@ onAuthStateChanged(auth, async function(user){
 
 
 
-    document.getElementById("loginBox").style.display="none";
+    document.getElementById("loginContainer").style.display="none";
 document.getElementById("topbar").style.display = "flex";
     document.getElementById("orders").style.display="block";
 const q = query(
