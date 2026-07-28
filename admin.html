@@ -126,9 +126,7 @@ onAuthStateChanged(auth,function(user){
 const q = query(
     collection(db, "orders"),
     orderBy("createdAt", "desc")
-);
-
-const snapshot = await getDocs(q);
+    const snapshot = await getDocs(q);
 
 
 console.log(snapshot.size);
@@ -233,6 +231,9 @@ snapshot.forEach(doc => console.log(doc.id, doc.data()));
 document.getElementById("orders").innerHTML = html;
     
 });
+);
+
+
 
 </script>
 
