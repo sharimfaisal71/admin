@@ -178,7 +178,7 @@ onAuthStateChanged(auth, async function(user){
 
 
     document.getElementById("loginBox").style.display="none";
-
+document.getElementById("topbar").style.display = "flex";
     document.getElementById("orders").style.display="block";
 const q = query(
     collection(db, "orders"),
@@ -295,7 +295,6 @@ document.getElementById("logoutBtn").onclick = async () => {
     location.reload();
 
 };
-document.querySelector("topbar").style.display = "flex";
 });
 
 
