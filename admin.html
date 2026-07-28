@@ -59,7 +59,9 @@ Sign in with Google
 
 </div>
 
-<div id="adminPanel">
+<h2>SFH Orders</h2>
+
+<div id="orders">
 
 <h2>✅ Access Granted</h2>
 
@@ -74,6 +76,15 @@ Sign in with Google
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
+    getFirestore,
+    collection,
+    getDocs,
+    setDoc,
+    updateDoc, 
+    doc,
+    getDoc,
+    query,
+    orderBy,    
 getAuth,
 GoogleAuthProvider,
 signInWithPopup,
@@ -96,7 +107,7 @@ from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
 const app = initializeApp(firebaseConfig);
-
+const db = getFirestore(app);
 const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
@@ -122,7 +133,115 @@ onAuthStateChanged(auth,function(user){
     document.getElementById("adminPanel").style.display="block";
 
 });
+const q = query(
+    collection(db, "orders"),
+    orderBy("createdAt", "desc")
+);
 
+const snapshot = await getDocs(q);
+
+
+console.log(snapshot.size);
+let html = "";
+
+
+snapshot.forEach(doc => {
+  
+
+
+
+    const order = doc.data();
+
+    html += `
+       <div><hr>
+            <h3>${doc.id}</h3>
+            <p>Name: ${order.name}</p>
+            <p>Phone: ${order.phone}</p>
+            <p>City: ${order.city}</p>
+            <p>Address: ${order.address}</p>
+            <p>Status: ${order.status}</p>
+  <button onclick="addStatus('${doc.id}', '🔴 Cancelled/ Failed Delivery')">
+        🔴 Cancelled/ Failed
+    </button>
+   <button onclick="addStatus('${doc.id}', '🟠 Processing')">
+        🟠 Processing
+    </button>
+
+    <button onclick="addStatus('${doc.id}', '🟡 Shipped')">
+        🟡 Shipped
+    </button>
+
+    <button onclick="addStatus('${doc.id}', ' 🟢 Delivered')">
+        🟢 Delivered
+    </button>
+            <p>Total: ${order.total}</p>
+            </hr>
+        </div>
+    `;
+
+});
+async function addStatus(invoiceNumber, newStatus) {
+
+    const docRef = doc(db, "orders", invoiceNumber);
+
+    const snap = await getDoc(docRef);
+
+    if (!snap.exists()) {
+        alert("Order not found.");
+        return;
+    }
+
+    const order = snap.data();
+
+if (newStatus == "🟡 Shipped") {
+let tracker = prompt("Enter the DEX tracking number");
+if (tracker > "") { 
+if ( 
+confirm("Is " + tracker + " the DEX tracking number for " + invoiceNumber + "?")
+) {
+    let history = order.history ||  [];
+let hereHTML = `! Your tracking number is <b>${tracker}</b>. Further tracking can be done <a href="https://www.dex.com.pk">
+<b>here</b>
+</a>.`
+;
+    history.unshift({
+        status: newStatus + hereHTML,
+        time: new Date().toLocaleString()
+    });
+
+    await updateDoc(docRef, {
+        status: newStatus + hereHTML,
+        history: history
+    });
+
+    alert("Status updated!");
+
+
+}
+} 
+}else {
+
+
+let history = order.history ||  [];
+    history.unshift({
+        status: newStatus,
+        time: new Date().toLocaleString()
+    });
+
+    await updateDoc(docRef, {
+        status: newStatus,
+        history: history
+    });
+
+    alert("Status updated!");
+}
+}
+window.addStatus = addStatus;
+console.log(snapshot.size);
+
+snapshot.forEach(doc => console.log(doc.id, doc.data()));
+document.getElementById("orders").innerHTML = html;
+    
 </script>
 
 </body>
