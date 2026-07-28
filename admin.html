@@ -103,27 +103,19 @@ const provider = new GoogleAuthProvider();
 
 document.getElementById("loginBtn").onclick = function(){
 
-    signInWithPopup(auth,provider)
-    .catch(error=>alert(error.message));
+signInWithPopup(auth, provider)
+  .catch(error => {
+    alert(error.message);
+  });
 
 };
-
 onAuthStateChanged(auth,function(user){
 
     if(!user){
         return;
     }
 
-    // CHANGE THIS TO YOUR GMAIL
-    if(user.email !== "your@gmail.com"){
 
-        alert("Access Denied!");
-
-        signOut(auth);
-
-        return;
-
-    }
 
     document.getElementById("login").style.display="none";
 
@@ -135,4 +127,4 @@ onAuthStateChanged(auth,function(user){
 
 </body>
 </html>
-```
+
