@@ -112,7 +112,7 @@ signInWithPopup(auth, provider)
   });
 
 };
-onAuthStateChanged(auth,function(user){
+onAuthStateChanged(auth, async function(user){
 
     if(!user){
         return;
