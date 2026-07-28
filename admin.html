@@ -123,8 +123,6 @@ onAuthStateChanged(auth,function(user){
     document.getElementById("login").style.display="none";
 
     document.getElementById("orders").style.display="block";
-
-});
 const q = query(
     collection(db, "orders"),
     orderBy("createdAt", "desc")
@@ -234,6 +232,8 @@ console.log(snapshot.size);
 snapshot.forEach(doc => console.log(doc.id, doc.data()));
 document.getElementById("orders").innerHTML = html;
     
+});
+
 </script>
 
 </body>
