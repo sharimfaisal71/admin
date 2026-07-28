@@ -165,7 +165,7 @@ snapshot.forEach(doc => {
         🟢 Delivered
     </button>
             <p>Total: ${order.total}</p>
-            </hr>
+            
         </div>
     `;
 
@@ -185,7 +185,7 @@ async function addStatus(invoiceNumber, newStatus) {
 
 if (newStatus == "🟡 Shipped") {
 let tracker = prompt("Enter the DEX tracking number");
-if (tracker > "") { 
+if (tracker && tracker.trim() !== "") { 
 if ( 
 confirm("Is " + tracker + " the DEX tracking number for " + invoiceNumber + "?")
 ) {
