@@ -1,0 +1,138 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SFH Multistore Admin Login</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#111827;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.loginBox{
+    background:#1f2937;
+    padding:30px;
+    border-radius:12px;
+    width:350px;
+    text-align:center;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    background:#4285F4;
+    color:white;
+    font-size:16px;
+}
+
+#adminPanel{
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="loginBox">
+
+<div id="login">
+
+<h2>SFH Multistore Admin</h2>
+
+<p>Please sign in with your Google account.</p>
+
+<button id="loginBtn">
+Sign in with Google
+</button>
+
+</div>
+
+<div id="adminPanel">
+
+<h2>✅ Access Granted</h2>
+
+<p>Welcome Admin.</p>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+getAuth,
+GoogleAuthProvider,
+signInWithPopup,
+onAuthStateChanged,
+signOut
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+
+  const firebaseConfig = {
+  apiKey: "AIzaSyAIvnb6gO0HwwtNUeK69hXcs5_9Tvoq5io",
+  authDomain: "sfh-multistore.firebaseapp.com",
+  projectId: "sfh-multistore",
+  storageBucket: "sfh-multistore.firebasestorage.app",
+  messagingSenderId: "645514728433",
+  appId: "1:645514728433:web:aefe52d615b1374302aa50",
+  measurementId: "G-E8W2LKR9G3"
+  };
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const provider = new GoogleAuthProvider();
+
+document.getElementById("loginBtn").onclick = function(){
+
+    signInWithPopup(auth,provider)
+    .catch(error=>alert(error.message));
+
+};
+
+onAuthStateChanged(auth,function(user){
+
+    if(!user){
+        return;
+    }
+
+    // CHANGE THIS TO YOUR GMAIL
+    if(user.email !== "your@gmail.com"){
+
+        alert("Access Denied!");
+
+        signOut(auth);
+
+        return;
+
+    }
+
+    document.getElementById("login").style.display="none";
+
+    document.getElementById("adminPanel").style.display="block";
+
+});
+
+</script>
+
+</body>
+</html>
+```
