@@ -57,14 +57,8 @@ Sign in with Google
 </button>
 
 </div>
-<div>
 <h2>SFH Orders</h2>
-
 <div id="orders">
-
-<h2>✅ Access Granted</h2>
-
-<p>Welcome Admin.</p>
 
 </div>
 
@@ -73,7 +67,6 @@ Sign in with Google
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-
 import {
     getFirestore,
     collection,
@@ -83,7 +76,9 @@ import {
     doc,
     getDoc,
     query,
-    orderBy,    
+    orderBy
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import {    
 getAuth,
 GoogleAuthProvider,
 signInWithPopup,
