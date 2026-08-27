@@ -268,7 +268,7 @@ if (
 confirm("Is " + tracker + " the DEX tracking number for " + invoiceNumber + "?")
 ) {
     let history = order.history ||  [];
-let hereHTML = `! Your tracking number is <b>${tracker}</b>. Further tracking can be done <a href="https://www.dex.com.pk">
+let hereHTML = `! Your tracking number is <b>${tracker}</b>. Further tracking can be done <a href="https://www.dex.com.pk/tracking?references=${tracker}">
 <b>here</b>
 </a>.`
 ;
